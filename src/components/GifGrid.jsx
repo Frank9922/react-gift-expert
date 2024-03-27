@@ -4,16 +4,21 @@ import { GifItem } from "./GifItem";
 import { useFetchGifs } from "../hooks/useFetchGifs";
 import PropTypes from 'prop-types'
 
-export const GifGrid = ( { category } ) => {
+export const GifGrid = ( { category, RemoveCategory } ) => {
 
     const { imagenes, isLoading } = useFetchGifs(category);
 
     return (
         <>
+            <div>
+            <div className="card-title">
             <h3>{category}</h3>
             {
                 isLoading ? (<h2>Cargando...</h2>) : null
             }
+            <button onClick={() => {RemoveCategory(category)}} className="btn-eliminar">Eliminar</button>
+            </div>
+
             <div className="card-grid">
                 {
                     imagenes.map( (image) => (
@@ -23,6 +28,7 @@ export const GifGrid = ( { category } ) => {
                         />
                     ))
                 }
+            </div>
             </div>
 
             
